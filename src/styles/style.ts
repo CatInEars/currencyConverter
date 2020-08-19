@@ -21,13 +21,5 @@ export const styles: any = StyleSheet.create({
     height: 40,
     backgroundColor: 'skyblue'
   },
-  currencyButton: {
-    width: '100%',
-    height: '100%',
-    padding: 0,
-    margin: 0,
-    position: 'absolute',
-    right: '-80%',
-    top: '-30%',
-  }
+  currencyButton: {}
 });

@@ -1,32 +1,23 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View, TextInput } from 'react-native';
-import SelectInput from 'react-native-select-input-ios';
-
-import { handleChange } from '../others/InputConverterChange';
-
 import { styles } from '../styles/style';
 
-export function InputConvert() {
-  const [inputValue, setInputValue] = useState('100');
+interface IInputProps {
+  value: string,
+  onChange: (e: string) => void,
+}
 
-  const options = [{ value: 'RRR.', label: 'RUB' }]
-
+export function InputConvert({ value, onChange }: IInputProps) {
   return (
     <View style={styles.converterContainer}>
       <TextInput 
         style={styles.input}
-        onChangeText={e => handleChange(e, setInputValue)}
-        value={inputValue}
+        onChangeText={onChange}
+        value={value}
         placeholder='Писать сюда'
         placeholderTextColor='gray'
         keyboardType='number-pad'
       />
-
-      <View style={styles.currencyButton}>
-        <SelectInput value={0} options={options} />
-      </View>
-
-
     </View>
   );
 }
