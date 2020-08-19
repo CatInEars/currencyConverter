@@ -10,8 +10,6 @@ export function Converter() {
     let filtered = valueFilter(e);
     if ( filtered === null ) return;
 
-    console.log(e, inputName);
-
     // Редачить конвертацию тут
     let result: string | number = inputName === 'first' ? +e * 70 : +e / 70;
     if ( (result ^ 0) === result ) {
