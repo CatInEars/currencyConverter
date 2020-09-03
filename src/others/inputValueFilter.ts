@@ -16,7 +16,8 @@ export function valueFilter(e: string): (null | string) {
     (+e ^ 0) === +e && 
     e[1] !== '.' &&
     e.length > 1
-  ) {
+  ) { 
+    console.log('delete zero')
     return e.substr(1);
   }
 
