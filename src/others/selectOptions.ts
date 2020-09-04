@@ -1,4 +1,4 @@
-export const options = [
+export const shortOptions = [
   {
     value: 1, 
     label: 'RUB'
@@ -16,7 +16,7 @@ export const options = [
     label: 'CNY'
   },
   {
-    value: 10,
+    value: 99,
     label: 'Other'
   }
 ];

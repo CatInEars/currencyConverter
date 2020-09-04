@@ -1,14 +1,14 @@
 import { ToastAndroid } from 'react-native';
 
-export function valueFilter(e: string): (null | string) {
+export function valueFilter(e: string): string {
   if ( 
     e.match(/(,)|( )|(-)/i) || 
     e.indexOf('.') !== e.lastIndexOf('.')
-  ) return null;
+  ) return e.substr(0, e.length - 1);
 
   if ( e.length > 10 ) {
     ToastAndroid.show('Многа цифр', ToastAndroid.SHORT);
-    return null
+    return e.substr(0, e.length - 1);
   }
 
   if ( 
@@ -16,8 +16,7 @@ export function valueFilter(e: string): (null | string) {
     (+e ^ 0) === +e && 
     e[1] !== '.' &&
     e.length > 1
-  ) { 
-    console.log('delete zero')
+  ) {
     return e.substr(1);
   }
 

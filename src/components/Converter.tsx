@@ -1,41 +1,50 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { InputConvert } from './InputConvert';
 import { valueFilter } from '../others/inputValueFilter';
+import { shortOptions } from '../others/selectOptions';
 
-export function Converter() {
-  const [ firstInput, setFirstInput ] = useState('0');
-  const [ secondInput, setSecondInput ] = useState('0');
+import { ICurrentsData, ISelectOption } from '../interfaces/index';
 
-  function inputChanger (e: string, inputName: string): void {
-    let filtered = valueFilter(e);
-    if ( filtered === null ) return;
+type IProps = {
+  [current: string]: ICurrentsData
+}
 
-    // Редачить конвертацию тут
-    let result: string | number = inputName === 'first' ? +e * 70 : +e / 70;
-    if ( (result ^ 0) === result ) {
-      result = result.toString();
-    } else {
-      result = result.toFixed(2).toString();
-    }
-    
-    if ( inputName === 'first') {
-      setFirstInput(filtered);
-      setSecondInput(result);
-    } else {
-      setSecondInput(filtered);
-      setFirstInput(result);
-    }
-  }
+export function Converter({ currents }: IProps) {
+  const [firstInputTextValue, setFirstInput] = useState('0');
+  const [secondInputTextValue, setSecondInput] = useState('0');
+
+  const [firstInputCurrency, setFirstInputCurrency] = useState('');
+  const [secondInputCurrency, setSecondInputCurrency] = useState('');
+
+  const [firstInputOption, setFirstInputOptionValue] = useState(1);
+  const [secondInputOption, setSecondInputOptionValue] = useState(2);
+
+  useEffect(() => {
+    shortOptions.forEach( (option: ISelectOption) => {
+      if (option.value === firstInputOption) { 
+        setFirstInputCurrency(option.label);
+      }
+      if (option.value === secondInputOption) {
+        setSecondInputCurrency(option.label);
+      }
+    });
+  }, [firstInputCurrency, secondInputCurrency]);
 
   return (
     <>
       <InputConvert 
-        value={firstInput}
-        onChange={(e: string) => inputChanger(e, 'first')}
+        textValue={valueFilter(firstInputTextValue)}
+        optionValue={firstInputOption}
+        setOptionValue={setFirstInputOptionValue}
+        onChangeText={(e: string) => setFirstInput(e)}
+        onChangeCurrency={(value: number) => setFirstInputOptionValue(value)}
       />
       <InputConvert 
-        value={secondInput}
-        onChange={(e: string) => inputChanger(e, 'second')}
+        textValue={valueFilter(secondInputTextValue)}
+        optionValue={secondInputOption}
+        setOptionValue={setSecondInputOptionValue}
+        onChangeText={(e: string) => setSecondInput(e)}
+        onChangeCurrency={(value: number) => setSecondInputOptionValue(value)}
       />
     </>
   );
