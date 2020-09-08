@@ -12,7 +12,11 @@ export function MainScreen() {
   useEffect(() => {
     fetch('https://www.cbr-xml-daily.ru/daily_json.js')
       .then( resolve => resolve.json() )
-      .then( json => setData(json.Valute) )
+      .then( json => {
+        // Да, это костыль, бейте меня
+        json.Valute.RUB = {Value: 1, CharCode: 'RUB', Name: 'Рубль'}
+        setData(json.Valute);
+      })
       .catch( error => console.log(error) )
       .finally( () => setLoading(false) );
   }, []);
@@ -21,10 +25,10 @@ export function MainScreen() {
     <>
       {
         isLoading === true ?
-          <>
+          <View style={styles.center}>
             <ActivityIndicator />
             <Text>Loading</Text>
-          </>
+          </View>
         :
           <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
             <View style={styles.mainScreenContainer}>

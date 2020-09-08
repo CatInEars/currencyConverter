@@ -1,10 +1,15 @@
 import { StyleSheet } from 'react-native';
 
-export const styles = StyleSheet.create({
+export const styles: any = StyleSheet.create({
+  center: {
+    flex: 1, 
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
   mainScreenContainer: {
     flex: 1, 
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   converterContainer: {
     width: '60%',
