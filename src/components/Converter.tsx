@@ -16,8 +16,6 @@ export function Converter({ currents }: IProps) {
   const [firstInputCurrency, setFirstInputCurrency] = useState('RUB');
   const [secondInputCurrency, setSecondInputCurrency] = useState('USD');
 
-  // При смене значения по умолчанию чекнуть наличие option с таким 
-  // value в shortOptions!!!
   const [firstInputOption, setFirstInputOptionValue] = useState(1);
   const [secondInputOption, setSecondInputOptionValue] = useState(2);
 
@@ -45,18 +43,18 @@ export function Converter({ currents }: IProps) {
       res = (res^0) === res ? Math.ceil(res) : res.toFixed(2);
       
       setSecondInput(res.toString());
-    } else {
+    } else if (firstInputActivity !== undefined) {
 
-      let res: any = (
+      let res: string | number = (
         currents[secondInputCurrency].Value / 
         currents[firstInputCurrency].Value
-      ) * +firstInputTextValue;
-        
+      ) * +secondInputTextValue;
+
       res = (res^0) === res ? Math.ceil(res) : res.toFixed(2);
 
       setFirstInput(res.toString());
     }
-  }, [firstInputTextValue, secondInputTextValue]);
+  }, [firstInputTextValue, secondInputTextValue, firstInputCurrency, secondInputCurrency]);
 
   const onInputChange = (e: string, inputName: string) => {
     if (inputName === 'FIRST') {

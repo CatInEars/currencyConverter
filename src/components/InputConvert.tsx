@@ -13,11 +13,10 @@ interface IInputProps {
 }
 
 export function InputConvert({ textValue, optionValue, onChangeText, onChangeCurrency, setOptionValue }: IInputProps) {
-  // Если не указывать value через state, то смена валюты происходит с багом
-  // скорее всего внутренний косяк '@tele2/react-native-select-input'
-
-  // Так же игнорирую ворнинг от '@tele2/react-native-select-input'
   YellowBox.ignoreWarnings(['Warning: componentWillReceiveProps']);
+
+  // Тут только StackOverflow..
+  console.log();
 
   return (
     <View style={styles.converterContainer}>

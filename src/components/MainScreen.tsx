@@ -26,7 +26,7 @@ export function MainScreen() {
       {
         isLoading === true ?
           <View style={styles.center}>
-            <ActivityIndicator />
+            <ActivityIndicator size='large' />
             <Text>Loading</Text>
           </View>
         :
